@@ -1,0 +1,138 @@
+/* --- Global Styles --- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1a1a1a; /* 深色背景，极具现代感 */
+    color: #e0e0e0; /* 柔和的白色文字，防止刺眼 */
+    font-family: 'Inter', sans-serif; /* 保持现代字体 */
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif; /* 如果你加载了Montserrat，标题用它更有质感 */
+    text-transform: uppercase; /* 标题全大写，更硬朗 */
+    letter-spacing: 2px; /* 增加字母间距 */
+    color: #e62070; /* 玫红色，作为主点缀色，呼应你的PDF */
+}
+
+a {
+    transition: color 0.3s ease-in-out; /* 增加过渡动画 */
+}
+
+/* --- Header & Navigation --- */
+header {
+    background-color: #262626; /* 比背景稍亮的页眉背景 */
+    padding: 20px 0;
+    border-bottom: 2px solid #e62070; /* 底部有一条玫红色的细线 */
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    color: #e62070; /* Logo也用玫红色 */
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px; /* 增加间距 */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: #e0e0e0;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    color: #e62070; /* 鼠标悬停时变玫红色 */
+}
+
+/* --- Hero Section --- */
+#hero {
+    padding: 120px 0;
+    text-align: center;
+    background: radial-gradient(circle, #2a2a2a 0%, #1a1a1a 100%); /* 渐变背景 */
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+#hero p {
+    max-width: 600px;
+    margin: 20px auto;
+    line-height: 1.6;
+}
+
+.highlight {
+    color: #fff; /* 将 highlight 的文字变为白色，以在玫红色背景下突出 */
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 12px 35px;
+    background-color: #e62070; /* 玫红色按钮背景 */
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 30px;
+    box-shadow: 0 5px 15px rgba(230, 32, 112, 0.3); /* 玫红色阴影 */
+}
+
+.btn-primary:hover {
+    background-color: #cc1d63; /* 鼠标悬停按钮变深 */
+    box-shadow: 0 5px 20px rgba(230, 32, 112, 0.5); /* 阴影也加深 */
+}
+
+/* --- Main Content Area --- */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* --- Section Title and PDF Frame --- */
+main section {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+/* 让 iframe 有框，像一件裱起来的艺术品 */
+iframe {
+    width: 80%;
+    max-width: 1000px;
+    height: 800px;
+    margin: 0 auto;
+    border: 5px solid #404040; /* 深灰色边框 */
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6); /* 软阴影，营造悬浮感 */
+    background-color: #fff; /* 防止PDF加载前全黑 */
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid #404040;
+    color: #888;
+    font-size: 0.9rem;
+}
