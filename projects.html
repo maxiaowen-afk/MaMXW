@@ -1,56 +1,77 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- SEO: Search engines read these to understand your page -->
-  <title>10C PORTFOLIO</title>
-  <meta name="description" content="A brief description of your awesome project or portfolio.">
-
-  <!-- Typography: Importing 'Inter' from Google Fonts for a premium look -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <!-- CSS: Link to your stylesheet (make sure you have a style.css file) -->
+  <title>Projects | Xiaowen Ma</title>
   <link rel="stylesheet" href="MaMXW.css">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </head>
 <body>
-
-  <!-- Navigation Bar -->
   <header>
     <nav>
       <a href="index.html" class="logo" style="text-decoration: none;">Xiaowen Ma art.</a>
       <ul class="nav-links">
         <li><a href="about.html">About</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Main Content Area -->
-  <main>
-    <section style="text-align: center; margin-top: 40px;">
-        <a href="index.html" class="btn-primary" style="margin-bottom: 30px;">&larr; BACK TO HOME</a>
+  <main style="max-width: 1000px; margin: 60px auto; padding: 0 20px; text-align: center;">
 
-        <h2 style="margin-bottom: 20px;">Project 1: Digital Portfolio</h2>
+    <div style="margin-bottom: 50px;">
+        <a href="index.html" style="color: #e62070; text-decoration: none; font-weight: bold;">&larr; BACK TO HOME</a>
+    </div>
 
-        <iframe src="protfolio.pdf" width="100%" height="800px"></iframe>
-    </section>
-</main>
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 Your Name. Built with HTML & CSS.</p>
-  </footer>
+    <h2 style="color: white; margin-bottom: 40px; letter-spacing: 2px;">SELECT A WORK TO VIEW</h2>
 
-  <!-- JavaScript: Link to your logic scripts at the bottom for faster page load -->
-  <script src="script.js"></script>
+    <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 50px;">
+        <button onclick="showContent('model')" style="padding: 20px 40px; cursor: pointer; background: #e62070; color: white; border: none; border-radius: 10px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(230, 32, 112, 0.3);">
+            PROJECT 1: 3D MODEL
+        </button>
+        <button onclick="showContent('pdf')" style="padding: 20px 40px; cursor: pointer; background: #333; color: white; border: none; border-radius: 10px; font-weight: bold; font-size: 1.1rem; border: 1px solid #444;">
+            PROJECT 2: PDF PORTFOLIO
+        </button>
+    </div>
+
+    <div id="display-container" style="margin-top: 40px;">
+
+        <div id="content-model" style="display: none;">
+            <div style="background: #262626; border-radius: 15px; border: 1px solid #444; overflow: hidden;">
+                <model-viewer src="gallery.glb" alt="3D Model" auto-rotate camera-controls style="width: 100%; height: 600px;"></model-viewer>
+            </div>
+            <button onclick="hideAll()" style="margin-top: 20px; background: none; border: 1px solid #666; color: #999; cursor: pointer; padding: 5px 15px; border-radius: 5px;">Close View</button>
+        </div>
+
+        <div id="content-pdf" style="display: none;">
+            <div style="border-radius: 15px; border: 1px solid #444; overflow: hidden;">
+                <iframe src="protfolio.pdf" width="100%" height="800px" style="border: none;"></iframe>
+            </div>
+            <button onclick="hideAll()" style="margin-top: 20px; background: none; border: 1px solid #666; color: #999; cursor: pointer; padding: 5px 15px; border-radius: 5px;">Close View</button>
+        </div>
+
+    </div>
+  </main>
+
+  <script>
+    function showContent(type) {
+        // 先隐藏所有内容
+        hideAll();
+        // 显示选中的内容
+        if(type === 'model') {
+            document.getElementById('content-model').style.display = 'block';
+        } else {
+            document.getElementById('content-pdf').style.display = 'block';
+        }
+        // 自动滚动到内容区
+        document.getElementById('display-container').scrollIntoView({behavior: 'smooth'});
+    }
+
+    function hideAll() {
+        document.getElementById('content-model').style.display = 'none';
+        document.getElementById('content-pdf').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
-
-References:
-
-https://docs.github.com/en/pages Links to an external site.
