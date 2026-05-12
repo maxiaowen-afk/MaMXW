@@ -3,13 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xiaowen Ma | Portfolio</title>
+  <title>Xiaowen Ma | Digital Artist</title>
   <link rel="stylesheet" href="MaMXW.css">
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* 这里的样式你可以稍后移动到 MaMXW.css，现在先放在这里方便你预览 */
+    body {
+      background: #0a0a0a; /* 更深邃的黑色 */
+      font-family: 'Urbanist', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* 动态光晕背景 */
+    .bg-glow {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(230, 32, 112, 0.15) 0%, transparent 50%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* 霓虹按钮升级版 */
+    .btn-custom {
+      position: relative;
+      padding: 18px 45px;
+      font-size: 1.1rem;
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: transparent;
+      border: 2px solid #e62070;
+      border-radius: 50px; /* 圆角更高级 */
+      transition: 0.4s;
+      font-weight: 700;
+      display: inline-block;
+      overflow: hidden;
+    }
+
+    .btn-custom:hover {
+      background: #e62070;
+      box-shadow: 0 0 30px rgba(230, 32, 112, 0.6);
+      transform: scale(1.05);
+    }
+
+    /* 标题特效 */
+    .hero-title {
+      font-size: 4.5rem;
+      line-height: 1.1;
+      background: linear-gradient(to right, #fff, #e62070);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    /* 响应式：手机端标题变小 */
+    @media (max-width: 600px) {
+      .hero-title { font-size: 2.5rem; }
+    }
+  </style>
 </head>
 <body>
+  <div class="bg-glow"></div>
+
   <header>
     <nav>
-      <div class="logo">Xiaowen Ma art.</div>
+      <div class="logo" style="font-weight: 700; letter-spacing: 1px;">
+        MA <span style="color: #e62070;">XW</span> ART.
+      </div>
       <ul class="nav-links">
         <li><a href="about.html">About</a></li>
         <li><a href="projects.html">Projects</a></li>
@@ -18,17 +80,39 @@
     </nav>
   </header>
 
-  <main style="max-width: 800px; margin: 100px auto; text-align: center;">
-    <h1 style="font-size: 3rem; color: #e62070; margin-bottom: 20px;">WELCOME TO MY CREATIVE SPACE</h1>
-    <p style="font-size: 1.2rem; color: #bbb; margin-bottom: 40px;">I am a 3D designer and digital artist.</p>
+  <main style="max-width: 1000px; margin: 15vh auto; text-align: center; padding: 0 20px;">
 
-    <a href="projects.html" class="btn-primary" style="padding: 15px 40px; text-decoration: none; font-size: 1.2rem; background: #e62070; color: white; border-radius: 8px; font-weight: bold;">
-      EXPLORE PROJECTS
+    <div style="margin-bottom: 20px; opacity: 0.6; letter-spacing: 5px; font-size: 0.9rem;">
+        DIGITAL ARCHITECT & MODELER
+    </div>
+
+    <h1 class="hero-title">SHAPING<br>VIRTUAL REALITY</h1>
+
+    <p style="font-size: 1.4rem; color: #888; margin-bottom: 50px; font-weight: 300;">
+      Hi, I'm <span style="color: #fff; font-weight: 700;">Xiaowen Ma</span>. <br>
+      Building immersive 3D experiences from the ground up.
+    </p>
+
+    <a href="projects.html" class="btn-custom">
+      VIEW MY GALLERY
     </a>
+
+    <div style="margin-top: 100px; opacity: 0.3;">
+        <div style="width: 2px; height: 50px; background: linear-gradient(to bottom, #e62070, transparent); margin: 0 auto;"></div>
+    </div>
   </main>
 
-  <footer>
-    <p>&copy; 2026 Xiaowen Ma. Built with HTML & CSS.</p>
+  <footer style="margin-top: 50px; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05);">
+    <p style="color: #555; font-size: 0.8rem;">&copy; 2026 Xiaowen Ma. All rights reserved.</p>
   </footer>
+
+  <script>
+    const glow = document.querySelector('.bg-glow');
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      glow.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(230, 32, 112, 0.15) 0%, transparent 50%)`;
+    });
+  </script>
 </body>
 </html>
