@@ -1,77 +1,93 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Xiaowen Ma</title>
 
-  <!-- SEO: Search engines read these to understand your page -->
-  <title>10C PORTFOLIO</title>
-  <meta name="description" content="A brief description of your awesome project or portfolio.">
-
-  <!-- Typography: Importing 'Inter' from Google Fonts for a premium look -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <!-- CSS: Link to your stylesheet (make sure you have a style.css file) -->
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="MaMXW.css">
+
+  <style>
+    body {
+      background: #0a0a0a;
+      font-family: 'Urbanist', sans-serif;
+      color: white;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    /* 全站统一动态光晕背景 */
+    .bg-glow {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(230, 32, 112, 0.15) 0%, transparent 50%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* 关于页面的毛玻璃卡片 */
+    .about-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(15px);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 4px solid #e62070; /* 保留你的标志性粉色线条 */
+      text-align: left;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      background: linear-gradient(to right, #fff, #e62070);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 40px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .highlight-text {
+      color: #e62070;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 1.2rem;
+      margin-top: 30px;
+      display: block;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 25px;
+      font-weight: 300;
+    }
+
+    strong {
+      color: #fff;
+    }
+
+    /* 返回按钮样式 */
+    .back-home {
+      color: #e62070;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      display: inline-block;
+      margin-bottom: 30px;
+      transition: 0.3s;
+    }
+    .back-home:hover {
+      text-shadow: 0 0 10px rgba(230, 32, 112, 0.5);
+      transform: translateX(-5px);
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
+  <div class="bg-glow"></div>
+
   <header>
-    <nav>
-      <a href="index.html" class="logo" style="text-decoration: none;">Xiaowen Ma art.</a>
-      <ul class="nav-links">
-        <li><a href="about.html">About</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Main Content Area -->
-  <main>
-    <section style="max-width: 800px; margin: 40px auto; text-align: left; padding: 0 20px;">
-    <a href="index.html" class="btn-primary" style="display: inline-block; margin-bottom: 30px;">&larr; BACK TO HOME</a>
-
-    <h2 style="text-align: center; margin-bottom: 40px;">About Me</h2>
-
-    <div style="background-color: #262626; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 4px solid #e62070;">
-
-        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
-            Hello! I'm <strong>Xiaowen Ma</strong>, an Interior-Architecture Design student currently in my 7th year living in the United States. Growing up in a family where both of my parents are architects, design isn't just my major—it's in my blood. I've been surrounded by blueprints and spatial concepts my whole life, which naturally shaped my passion for creating functional and beautiful environments.
-        </p>
-
-        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
-            Before fully dedicating myself to architecture, I was a competitive ice-hockey player. The discipline, resilience, and fast-paced spatial awareness I learned on the ice still deeply influence how I approach my design projects today. I am also a huge sports enthusiast and love sharing these passions with my 10-year-old little brother.
-        </p>
-
-        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
-            When I'm not sketching or building 3D models, I am an avid gamer. Having played almost every popular video game on the market, I am constantly inspired by the incredible world-building and interactive environments within them.
-        </p>
-
-        <p style="font-size: 1.1rem; line-height: 1.8; color: #e62070; font-weight: bold; margin-top: 30px;">
-            My Vision & Dream:
-        </p>
-
-        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 0;">
-            My ultimate dream is to bridge my unique background in physical sports, virtual gaming worlds, and architectural legacy. I aspire to design interior spaces that are not just structurally elegant, but highly interactive and experiential—creating environments where people feel as engaged, immersed, and energized as they do in their favorite games or sports arenas.
-        </p>
-    </div>
-</section>
-</main>
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 Your Name. Built with HTML & CSS.</p>
-  </footer>
-
-  <!-- JavaScript: Link to your logic scripts at the bottom for faster page load -->
-  <script src="script.js"></script>
-</body>
-</html>
-
-References:
-
-https://docs.github.com/en/pages Links to an external site.
