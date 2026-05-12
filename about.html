@@ -17,7 +17,7 @@
       overflow-x: hidden;
     }
 
-    /* 全站统一动态光晕背景 */
+    /* 动态光晕背景 */
     .bg-glow {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -26,7 +26,7 @@
       pointer-events: none;
     }
 
-    /* 关于页面的毛玻璃卡片 */
+    /* 毛玻璃卡片 */
     .about-card {
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(15px);
@@ -34,8 +34,9 @@
       border-radius: 20px;
       box-shadow: 0 20px 50px rgba(0,0,0,0.5);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-top: 4px solid #e62070; /* 保留你的标志性粉色线条 */
+      border-top: 4px solid #e62070;
       text-align: left;
+      margin-bottom: 50px;
     }
 
     .section-title {
@@ -55,31 +56,33 @@
       font-size: 1.2rem;
       margin-top: 30px;
       display: block;
+      margin-bottom: 15px;
     }
 
     p {
       font-size: 1.1rem;
       line-height: 1.8;
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.85);
       margin-bottom: 25px;
       font-weight: 300;
     }
 
     strong {
       color: #fff;
+      font-weight: 700;
     }
 
-    /* 返回按钮样式 */
     .back-home {
       color: #e62070;
       text-decoration: none;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       letter-spacing: 2px;
       display: inline-block;
       margin-bottom: 30px;
       transition: 0.3s;
     }
+
     .back-home:hover {
       text-shadow: 0 0 10px rgba(230, 32, 112, 0.5);
       transform: translateX(-5px);
@@ -91,3 +94,57 @@
   <div class="bg-glow"></div>
 
   <header>
+    <nav>
+      <div class="logo" style="font-weight: 700; letter-spacing: 1px;">
+        MA <span style="color: #e62070;">XW</span> ART.
+      </div>
+      <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="max-width: 900px; margin: 60px auto; padding: 0 20px; text-align: center;">
+
+    <a href="index.html" class="back-home">&larr; BACK TO HOME</a>
+
+    <h1 class="section-title">ABOUT ME</h1>
+
+    <div class="about-card">
+        <p>
+            Hello! I'm <strong>Xiaowen Ma</strong>, an Interior-Architecture Design student currently in my 7th year living in the United States. Growing up in a family where both of my parents are architects, design isn't just my major—it's in my blood. I've been surrounded by blueprints and spatial concepts my whole life, which naturally shaped my passion for creating functional and beautiful environments.
+        </p>
+
+        <p>
+            Before fully dedicating myself to architecture, I was a competitive ice-hockey player. The discipline, resilience, and fast-paced spatial awareness I learned on the ice still deeply influence how I approach my design projects today. I am also a huge sports enthusiast and love sharing these passions with my 10-year-old little brother.
+        </p>
+
+        <p>
+            When I'm not sketching or building 3D models, I am an avid gamer. Having played almost every popular video game on the market, I am constantly inspired by the incredible world-building and interactive environments within them.
+        </p>
+
+        <span class="highlight-text">My Vision & Dream</span>
+
+        <p style="margin-bottom: 0;">
+            My ultimate dream is to bridge my unique background in physical sports, virtual gaming worlds, and architectural legacy. I aspire to design interior spaces that are not just structurally elegant, but highly interactive and experiential—creating environments where people feel as engaged, immersed, and energized as they do in their favorite games or sports arenas.
+        </p>
+    </div>
+  </main>
+
+  <footer style="padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
+    <p style="color: #555; font-size: 0.8rem;">&copy; 2026 Xiaowen Ma. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // 鼠标跟随光晕脚本
+    const glow = document.querySelector('.bg-glow');
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      glow.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(230, 32, 112, 0.15) 0%, transparent 50%)`;
+    });
+  </script>
+</body>
+</html>
