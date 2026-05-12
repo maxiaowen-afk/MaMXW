@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,110 +9,39 @@
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
   <style>
-    body {
-      background: #0a0a0a;
-      font-family: 'Urbanist', sans-serif;
-      color: white;
-      margin: 0;
-      overflow-x: hidden;
-    }
+    body { background: #0a0a0a; font-family: 'Urbanist', sans-serif; color: white; margin: 0; overflow-x: hidden; }
+    .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(230, 32, 112, 0.15) 0%, transparent 50%); z-index: -1; pointer-events: none; }
 
-    .bg-glow {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at 50% 50%, rgba(230, 32, 112, 0.15) 0%, transparent 50%);
-      z-index: -1;
-      pointer-events: none;
-    }
+    /* 导航栏样式确保全站统一 */
+    header { padding: 20px 0; }
+    nav { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .nav-links { display: flex; list-style: none; gap: 30px; }
+    .nav-links a { color: white; text-decoration: none; font-size: 0.9rem; letter-spacing: 1px; transition: 0.3s; }
+    .nav-links a:hover { color: #e62070; }
 
     .project-btn {
-      padding: 15px 25px;
-      cursor: pointer;
-      background: transparent;
-      color: white;
-      border: 2px solid #e62070;
-      border-radius: 50px;
-      font-weight: bold;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      transition: all 0.4s ease;
-      flex: 1;
-      max-width: 250px;
-      min-width: 200px;
-      text-transform: uppercase;
+      padding: 15px 25px; cursor: pointer; background: transparent; color: white;
+      border: 2px solid #e62070; border-radius: 50px; font-weight: bold;
+      font-size: 0.9rem; letter-spacing: 1px; transition: 0.4s;
+      flex: 1; max-width: 250px; min-width: 200px; text-transform: uppercase;
     }
-
-    .project-btn:hover {
-      background: #e62070;
-      box-shadow: 0 0 25px rgba(230, 32, 112, 0.6);
-      transform: translateY(-3px) scale(1.05);
-    }
+    .project-btn:hover { background: #e62070; box-shadow: 0 0 25px rgba(230, 32, 112, 0.6); transform: translateY(-3px); }
 
     .content-box {
-      display: none;
-      margin-top: 40px;
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 30px;
+      display: none; /* 初始隐藏 */
+      margin-top: 40px; background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px); border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1); padding: 30px;
       box-shadow: 0 20px 50px rgba(0,0,0,0.5);
     }
 
-    /* 过程文字样式 */
-    .process-section {
-      text-align: left;
-      margin-top: 40px;
-      padding: 20px;
-      border-top: 1px solid rgba(230, 32, 112, 0.3);
-    }
+    .process-section { text-align: left; margin-top: 40px; padding: 20px; border-top: 1px solid rgba(230, 32, 112, 0.3); }
+    .process-title { color: #e62070; font-size: 1.4rem; margin-bottom: 20px; font-weight: 700; }
+    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+    .process-item p { font-size: 0.9rem; line-height: 1.6; color: #bbb; }
 
-    .process-title {
-      color: #e62070;
-      font-size: 1.4rem;
-      margin-bottom: 20px;
-      letter-spacing: 2px;
-      font-weight: 700;
-    }
-
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-
-    .process-item h4 {
-      margin-bottom: 10px;
-      color: #fff;
-      font-size: 1.1rem;
-    }
-
-    .process-item p {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: #bbb;
-      font-weight: 300;
-    }
-
-    .section-title {
-      font-size: 3rem;
-      background: linear-gradient(to right, #fff, #e62070);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 40px;
-      font-weight: 700;
-    }
-
-    .close-btn {
-      margin-top: 20px;
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.3);
-      color: rgba(255,255,255,0.5);
-      cursor: pointer;
-      padding: 8px 20px;
-      border-radius: 5px;
-      transition: 0.3s;
-    }
+    .close-btn { margin-top: 20px; background: transparent; border: 1px solid #444; color: #888; cursor: pointer; padding: 8px 20px; border-radius: 5px; }
+    .close-btn:hover { color: white; border-color: #e62070; }
   </style>
 </head>
 <body>
@@ -120,9 +49,7 @@
 
   <header>
     <nav>
-      <div class="logo" style="font-weight: 700; letter-spacing: 1px;">
-        MA <span style="color: #e62070;">XW</span> ART.
-      </div>
+      <div class="logo" style="font-weight: 700;">MA <span style="color: #e62070;">XW</span> ART.</div>
       <ul class="nav-links">
         <li><a href="about.html">About</a></li>
         <li><a href="projects.html">Projects</a></li>
@@ -131,35 +58,75 @@
     </nav>
   </header>
 
-  <main style="max-width: 1100px; margin: 60px auto; padding: 0 20px; text-align: center;">
-
-    <div style="margin-bottom: 30px; opacity: 0.5;">
-        <a href="index.html" style="color: #fff; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px;">&larr; BACK TO HOME</a>
-    </div>
-
-    <h1 class="section-title">SELECTED WORKS</h1>
+  <main style="max-width: 1100px; margin: 40px auto; padding: 0 20px; text-align: center;">
+    <h1 style="font-size: 3rem; margin-bottom: 40px;">SELECTED WORKS</h1>
 
     <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; flex-wrap: wrap;">
         <button onclick="showContent('pdf')" class="project-btn">PROJECT 01: PORTFOLIO</button>
-        <button onclick="showContent('model_gallery')" class="project-btn">PROJECT 02: GALLERY</button>
-        <button onclick="showContent('model_minions')" class="project-btn">PROJECT 03: MINIONS</button>
+        <button onclick="showContent('gallery')" class="project-btn">PROJECT 02: GALLERY</button>
+        <button onclick="showContent('minions')" class="project-btn">PROJECT 03: MINIONS</button>
     </div>
 
     <div id="display-container">
-
         <div id="content-pdf" class="content-box">
-            <div style="border-radius: 15px; overflow: hidden; background: white;">
-                <iframe src="assets/%E4%BD%9C%E5%93%81%E9%9B%86.pdf" width="100%" height="800px" style="border: none;"></iframe>
-            </div>
-
+            <iframe src="assets/%E4%BD%9C%E5%93%81%E9%9B%86.pdf" width="100%" height="700px" style="border: none; border-radius: 10px;"></iframe>
             <div class="process-section">
                 <div class="process-title">THE CURATION PROCESS</div>
                 <div class="process-grid">
-                    <div class="process-item">
-                        <h4>01. Strategy</h4>
-                        <p>为了展示室内建筑的多样性，我精心筛选了过去几年中最具代表性的项目。重点在于展示从宏观空间布局到微观材质细节的掌控力。</p>
-                    </div>
-                    <div class="process-item">
-                        <h4>02. Visual Logic</h4>
-                        <p>使用 InDesign 进行排版，采用极简的黑白灰基调，确保图纸本身成为视觉焦点。每一页的叙事逻辑都遵循“从概念草图到最终实景”的顺序。</p>
-                    </div>
+                    <div class="process-item"><h4>01. Strategy</h4><p>为了展示室内建筑的多样性，我精心筛选了最具代表性的项目，展示从空间布局到材质细节的掌控力。</p></div>
+                    <div class="process-item"><h4>02. Visual Logic</h4><p>采用极简的黑白灰基调排版，确保图纸本身成为视觉焦点，遵循“从概念到实景”的叙事顺序。</p></div>
+                </div>
+            </div>
+            <button onclick="hideAll()" class="close-btn">COLLAPSE VIEW</button>
+        </div>
+
+        <div id="content-gallery" class="content-box">
+            <model-viewer src="assets/gallery.glb" auto-rotate camera-controls style="width: 100%; height: 500px;"></model-viewer>
+            <div class="process-section">
+                <div class="process-title">DESIGN PROCESS</div>
+                <div class="process-grid">
+                    <div class="process-item"><h4>01. Concept</h4><p>探索光影在封闭空间中的流动感，通过自然光的引导让参观者在画廊中自由探索。</p></div>
+                    <div class="process-item"><h4>02. Technical</h4><p>使用 Rhino 进行建模，利用曲面细分技术创造流畅内墙，并优化模型面数以提升加载速度。</p></div>
+                </div>
+            </div>
+            <button onclick="hideAll()" class="close-btn">COLLAPSE VIEW</button>
+        </div>
+
+        <div id="content-minions" class="content-box">
+            <model-viewer src="assets/Minions%203d.glb" auto-rotate camera-controls style="width: 100%; height: 500px;"></model-viewer>
+            <div class="process-section">
+                <div class="process-title">MODELING WORKFLOW</div>
+                <div class="process-grid">
+                    <div class="process-item"><h4>01. Anatomy</h4><p>作为对非线性几何体的练习，重点在于把握角色的比例感和游戏感的亲和力。</p></div>
+                    <div class="process-item"><h4>02. Texturing</h4><p>通过调整粗糙度和金属度，模拟高品质手办的塑料质感，探索趣味性融入建筑场景的可能。</p></div>
+                </div>
+            </div>
+            <button onclick="hideAll()" class="close-btn">COLLAPSE VIEW</button>
+        </div>
+    </div>
+  </main>
+
+  <script>
+    // 鼠标光晕效果
+    const glow = document.querySelector('.bg-glow');
+    document.addEventListener('mousemove', (e) => {
+      glow.style.background = `radial-gradient(circle at ${(e.clientX / window.innerWidth) * 100}% ${(e.clientY / window.innerHeight) * 100}%, rgba(230, 32, 112, 0.15) 0%, transparent 50%)`;
+    });
+
+    // 核心切换逻辑
+    function showContent(id) {
+        hideAll();
+        const target = document.getElementById('content-' + id);
+        if (target) {
+            target.style.display = 'block';
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    function hideAll() {
+        const boxes = document.querySelectorAll('.content-box');
+        boxes.forEach(box => { box.style.display = 'none'; });
+    }
+  </script>
+</body>
+</html>
