@@ -26,6 +26,18 @@
       pointer-events: none;
     }
 
+    /* 导航栏 Logo 链接样式 */
+    .logo {
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: white;
+      transition: 0.3s;
+    }
+    .logo:hover {
+      opacity: 0.8;
+    }
+
     /* 毛玻璃卡片 */
     .about-card {
       background: rgba(255, 255, 255, 0.03);
@@ -95,9 +107,9 @@
 
   <header>
     <nav>
-      <div class="logo" style="font-weight: 700; letter-spacing: 1px;">
+      <a href="index.html" class="logo">
         MA <span style="color: #e62070;">XW</span> ART.
-      </div>
+      </a>
       <ul class="nav-links">
         <li><a href="about.html">About</a></li>
         <li><a href="projects.html">Projects</a></li>
@@ -138,7 +150,6 @@
   </footer>
 
   <script>
-    // 鼠标跟随光晕脚本
     const glow = document.querySelector('.bg-glow');
     document.addEventListener('mousemove', (e) => {
       const x = (e.clientX / window.innerWidth) * 100;
