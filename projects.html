@@ -8,22 +8,27 @@
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
   <style>
     .project-btn {
-      padding: 20px 30px;
+      padding: 15px 25px;
       cursor: pointer;
-      background: #e62070; /* 统一使用粉色 */
+      background: #e62070;
       color: white;
       border: none;
       border-radius: 10px;
       font-weight: bold;
       font-size: 1rem;
       box-shadow: 0 4px 15px rgba(230, 32, 112, 0.3);
-      transition: transform 0.2s, background 0.2s;
-      flex: 1; /* 让按钮宽度一致 */
+      transition: all 0.3s ease;
+      flex: 1;
       max-width: 250px;
+      min-width: 180px;
     }
     .project-btn:hover {
       background: #ff3385;
       transform: translateY(-2px);
+    }
+    .content-box {
+      display: none;
+      margin-top: 40px;
     }
   </style>
 </head>
@@ -39,67 +44,55 @@
     </nav>
   </header>
 
-  <main style="max-width: 1000px; margin: 60px auto; padding: 0 20px; text-align: center;">
-
-    <div style="margin-bottom: 50px;">
+  <main style="max-width: 1000px; margin: 40px auto; padding: 0 20px; text-align: center;">
+    <div style="margin-bottom: 30px;">
         <a href="index.html" style="color: #e62070; text-decoration: none; font-weight: bold;">&larr; BACK TO HOME</a>
     </div>
 
     <h2 style="color: white; margin-bottom: 40px; letter-spacing: 2px;">SELECT A WORK TO VIEW</h2>
 
     <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; flex-wrap: wrap;">
-        <button onclick="showContent('model1')" class="project-btn">
-            PROJECT 1: 3D MODEL
-        </button>
-        <button onclick="showContent('pdf')" class="project-btn">
-            PROJECT 2: PDF PORTFOLIO
-        </button>
-        <button onclick="showContent('model2')" class="project-btn">
-            PROJECT 3: NEW MODEL
-        </button>
+        <button onclick="showContent('pdf')" class="project-btn">PROJECT 1: PORTFOLIO PDF</button>
+        <button onclick="showContent('model_gallery')" class="project-btn">PROJECT 2: GALLERY 3D</button>
+        <button onclick="showContent('model_minions')" class="project-btn">PROJECT 3: MINIONS 3D</button>
     </div>
 
-    <div id="display-container" style="margin-top: 40px;">
+    <div id="display-container">
+        <div id="content-pdf" class="content-box">
+            <div style="border-radius: 15px; border: 1px solid #444; overflow: hidden; background: white;">
+                <iframe src="assets/protfolio.pdf" width="100%" height="800px" style="border: none;"></iframe>
+            </div>
+            <button onclick="hideAll()" style="margin-top: 20px; background: none; border: 1px solid #666; color: #999; cursor: pointer; padding: 5px 15px; border-radius: 5px;">Close View</button>
+        </div>
 
-        <div id="content-model1" style="display: none;">
+        <div id="content-model_gallery" class="content-box">
             <div style="background: #262626; border-radius: 15px; border: 1px solid #444; overflow: hidden;">
-                <model-viewer src="gallery.glb" alt="3D Model" auto-rotate camera-controls style="width: 100%; height: 600px;"></model-viewer>
+                <model-viewer src="assets/gallery.glb" alt="Gallery 3D Model" auto-rotate camera-controls style="width: 100%; height: 600px;"></model-viewer>
             </div>
             <button onclick="hideAll()" style="margin-top: 20px; background: none; border: 1px solid #666; color: #999; cursor: pointer; padding: 5px 15px; border-radius: 5px;">Close View</button>
         </div>
 
-        <div id="content-pdf" style="display: none;">
-            <div style="border-radius: 15px; border: 1px solid #444; overflow: hidden;">
-                <iframe src="protfolio.pdf" width="100%" height="800px" style="border: none;"></iframe>
-            </div>
-            <button onclick="hideAll()" style="margin-top: 20px; background: none; border: 1px solid #666; color: #999; cursor: pointer; padding: 5px 15px; border-radius: 5px;">Close View</button>
-        </div>
-
-        <div id="content-model2" style="display: none;">
+        <div id="content-model_minions" class="content-box">
             <div style="background: #262626; border-radius: 15px; border: 1px solid #444; overflow: hidden;">
-                <model-viewer src="new_model.glb" alt="New 3D Model" auto-rotate camera-controls style="width: 100%; height: 600px;"></model-viewer>
+                <model-viewer src="assets/Minions%203d.glb" alt="Minions 3D Model" auto-rotate camera-controls style="width: 100%; height: 600px;"></model-viewer>
             </div>
             <button onclick="hideAll()" style="margin-top: 20px; background: none; border: 1px solid #666; color: #999; cursor: pointer; padding: 5px 15px; border-radius: 5px;">Close View</button>
         </div>
-
     </div>
   </main>
 
   <script>
     function showContent(type) {
         hideAll();
-        // 改动点 4: 更新 JS 逻辑以支持更多模型
         const target = document.getElementById('content-' + type);
         if (target) {
             target.style.display = 'block';
-            document.getElementById('display-container').scrollIntoView({behavior: 'smooth'});
+            target.scrollIntoView({behavior: 'smooth', block: 'start'});
         }
     }
 
     function hideAll() {
-        document.getElementById('content-model1').style.display = 'none';
-        document.getElementById('content-pdf').style.display = 'none';
-        document.getElementById('content-model2').style.display = 'none';
+        document.querySelectorAll('.content-box').forEach(el => el.style.display = 'none');
     }
   </script>
 </body>
