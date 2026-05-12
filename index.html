@@ -8,14 +8,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;700&display=swap" rel="stylesheet">
 
   <style>
-    /* 这里的样式你可以稍后移动到 MaMXW.css，现在先放在这里方便你预览 */
     body {
-      background: #0a0a0a; /* 更深邃的黑色 */
+      background: #0a0a0a;
       font-family: 'Urbanist', sans-serif;
       overflow-x: hidden;
+      margin: 0;
     }
 
-    /* 动态光晕背景 */
     .bg-glow {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -24,7 +23,6 @@
       pointer-events: none;
     }
 
-    /* 霓虹按钮升级版 */
     .btn-custom {
       position: relative;
       padding: 18px 45px;
@@ -35,7 +33,7 @@
       letter-spacing: 2px;
       background: transparent;
       border: 2px solid #e62070;
-      border-radius: 50px; /* 圆角更高级 */
+      border-radius: 50px;
       transition: 0.4s;
       font-weight: 700;
       display: inline-block;
@@ -48,7 +46,6 @@
       transform: scale(1.05);
     }
 
-    /* 标题特效 */
     .hero-title {
       font-size: 4.5rem;
       line-height: 1.1;
@@ -56,9 +53,9 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 10px;
+      font-weight: 700;
     }
 
-    /* 响应式：手机端标题变小 */
     @media (max-width: 600px) {
       .hero-title { font-size: 2.5rem; }
     }
@@ -75,14 +72,14 @@
       <ul class="nav-links">
         <li><a href="about.html">About</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <main style="max-width: 1000px; margin: 15vh auto; text-align: center; padding: 0 20px;">
 
-    <div style="margin-bottom: 20px; opacity: 0.6; letter-spacing: 5px; font-size: 0.9rem;">
+    <div style="margin-bottom: 20px; opacity: 0.6; letter-spacing: 5px; font-size: 0.9rem; color: white;">
         DIGITAL ARCHITECT & MODELER
     </div>
 
@@ -102,7 +99,10 @@
     </div>
   </main>
 
-  <footer style="margin-top: 50px; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05);">
+  <footer style="margin-top: 50px; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
+    <p style="margin-bottom: 10px;">
+        <a href="contact.html" style="color: #888; text-decoration: none; font-size: 0.9rem; transition: 0.3s;" onmouseover="this.style.color='#e62070'" onmouseout="this.style.color='#888'">GET IN TOUCH</a>
+    </p>
     <p style="color: #555; font-size: 0.8rem;">&copy; 2026 Xiaowen Ma. All rights reserved.</p>
   </footer>
 
