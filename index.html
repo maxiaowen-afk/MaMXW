@@ -11,52 +11,59 @@
     body {
       background: #0a0a0a;
       font-family: 'Urbanist', sans-serif;
-      overflow-x: hidden;
+      overflow: hidden; /* 防止粒子超出屏幕产生滚动条 */
       margin: 0;
     }
 
-    /* 鼠标交互光晕层 - 提高 z-index 确保叠加在背景图之上 */
+    /* 鼠标交互光晕层 - 提高 z-index 确保叠加在粒子之上 */
     .bg-glow {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       background: radial-gradient(circle at 50% 50%, rgba(230, 32, 112, 0.15) 0%, transparent 50%);
-      z-index: 1;
+      z-index: 2; /* 放在所有内容的底层，但粒子之上 */
       pointer-events: none;
     }
 
-    /* 屏保艺术背景图容器 */
-    .screensaver-bg {
+    /* 纸片艺术粒子容器 */
+    .artwork-particles {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0; /* 放在最底层 */
+      z-index: 1; /* 放在光晕和内容的下面 */
       pointer-events: none;
       overflow: hidden;
     }
 
-    /* 单张背景图片样式 */
-    .screensaver-bg img {
+    /* 单个“纸片”粒子的样式 */
+    .artwork-particle {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* 保证图片比例完美，裁剪不变形 */
-      opacity: 0; /* 初始全部隐藏 */
-      transition: opacity 2s ease-in-out; /* 2秒的平滑淡入淡出效果 */
+      width: auto;
+      height: auto;
+      object-fit: contain; /* 保证全画幅不裁剪 */
+      pointer-events: none;
+      opacity: 0; /* 初始隐藏，通过动画淡入 */
+
+      /* 添加纸片般的轻微投影，使其更立体 */
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+
+      /* 基础变换：大小和旋转 */
+      transform-style: preserve-3d;
+
+      /* 淡入淡出和基础变换动画 */
+      transition: opacity 3s ease-in-out, transform 3s ease-in-out;
     }
 
-    /* 让第一张默认显示 */
-    .screensaver-bg img.active {
-      opacity: 0.23; /* 控制背景图的最高透明度，20%-25% 视觉效果最神秘高级 */
+    /* 当粒子活动时的状态：控制最高透明度 23% */
+    .artwork-particle.active {
+      opacity: 0.23; /* 20%-25% 视觉效果最神秘高级 */
     }
 
-    /* 核心内容容器 - 提升 z-index 确保文字和按钮在图片上层，可正常点击 */
+    /* 核心内容容器 - 最高 z-index */
     header, main, footer {
       position: relative;
-      z-index: 2;
+      z-index: 3;
     }
 
     .btn-custom {
@@ -100,16 +107,7 @@
 <body>
   <div class="bg-glow"></div>
 
-  <div class="screensaver-bg">
-    <img src="assets/cover.jpg" class="active" alt="Artwork 1">
-    <img src="assets/cover1.jpg" alt="Artwork 2">
-    <img src="assets/cover2.jpg" alt="Artwork 3">
-    <img src="assets/cover3.jpg" alt="Artwork 4">
-    <img src="assets/cover4.jpg" alt="Artwork 5">
-    <img src="assets/cover5.jpg" alt="Artwork 6">
-    <img src="assets/cover6.jpg" alt="Artwork 7">
-    <img src="assets/cover7.jpg" alt="Artwork 8">
-  </div>
+  <div class="artwork-particles" id="particle-container"></div>
 
   <header>
     <nav>
@@ -142,4 +140,65 @@
     </a>
 
     <div style="margin-top: 100px; opacity: 0.3;">
-        <div style="width: 2px; height: 50px; background: linear-gradient(to bottom, #e6
+        <div style="width: 2px; height: 50px; background: linear-gradient(to bottom, #e62070, transparent); margin: 0 auto;"></div>
+    </div>
+  </main>
+
+  <footer style="margin-top: 50px; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
+    <p style="margin-bottom: 10px;">
+        <a href="contact.html" style="color: #888; text-decoration: none; font-size: 0.9rem; transition: 0.3s;" onmouseover="this.style.color='#e62070'" onmouseout="this.style.color='#888'">GET IN TOUCH</a>
+    </p>
+    <p style="color: #555; font-size: 0.8rem;">&copy; 2026 Xiaowen Ma. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // 1. 鼠标跟随红光逻辑
+    const glow = document.querySelector('.bg-glow');
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      glow.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(230, 32, 112, 0.15) 0%, transparent 50%)`;
+    });
+
+    // 2. 核心：纸片艺术粒子管理器
+    const container = document.getElementById('particle-container');
+    const imageSources = [
+      'assets/cover.jpg', 'assets/cover1.jpg', 'assets/cover2.jpg', 'assets/cover3.jpg',
+      'assets/cover4.jpg', 'assets/cover5.jpg', 'assets/cover6.jpg', 'assets/cover7.jpg'
+    ];
+    const particles = [];
+    const maxParticles = 18; // 屏幕上同时存在的最大粒子数，根据性能调整
+
+    // 创建粒子的函数
+    function createParticle() {
+      if (particles.length >= maxParticles) return; // 达到最大数量则不创建
+
+      const img = document.createElement('img');
+      // 随机选择一张画作
+      img.src = imageSources[Math.floor(Math.random() * imageSources.length)];
+      img.className = 'artwork-particle';
+      img.alt = 'Artwork Piece';
+
+      // 核心：全画幅不裁剪 (contain)
+      img.style.objectFit = 'contain';
+
+      // 1. 随机化基础属性
+      const size = 15 + Math.random() * 10; // 随机大小：15%-25% 屏幕宽度
+      img.style.width = `${size}vw`;
+
+      const startX = Math.random() * 100; // 随机起始位置 (X轴)
+      img.style.left = `${startX}%`;
+      const startY = Math.random() * 100; // 随机起始位置 (Y轴)
+      img.style.top = `${startY}%`;
+
+      const rotate = (Math.random() - 0.5) * 60; // 随机旋转角：-30度 到 30度
+      img.style.transform = `rotate(${rotate}deg) scale(0.2)`; // 初始缩小
+
+      container.appendChild(img);
+      particles.push(img);
+
+      // 2. 动画触发：淡入和漫游起点
+      // 使用 setTimeout 确保 DOM 渲染后再添加类
+      setTimeout(() => {
+        img.classList.add('active');
+        // 核心：漫游动画路径
