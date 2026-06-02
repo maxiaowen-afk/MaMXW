@@ -70,6 +70,7 @@
       overflow: hidden;
       box-shadow: 0 15px 35px rgba(0,0,0,0.6);
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      cursor: pointer; /* 提示用户可以点击放大 */
     }
 
     .drawing-card:hover {
@@ -78,7 +79,7 @@
       box-shadow: 0 20px 40px rgba(230, 32, 112, 0.15);
     }
 
-    /* 图片容器，确保比例完美不被拉伸 */
+    /* 图片容器，网格预览状态下裁剪统一比例 */
     .image-wrapper {
       width: 100%;
       height: 280px;
@@ -124,6 +125,59 @@
       letter-spacing: 1px;
     }
 
+    /* ==========================================================================
+       🆕 新增：全屏大图查看（Lightbox）容器及丝滑动画样式
+       ========================================================================== */
+    .lightbox-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5, 5, 5, 0.85);
+      backdrop-filter: blur(20px); /* 高级毛玻璃背景 */
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    /* 激活大图时的状态 */
+    .lightbox-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* 全幅大图自适应，绝不裁剪 */
+    .lightbox-img {
+      max-width: 90%;
+      max-height: 85vh;
+      object-fit: contain; /* 确保展示全画幅 */
+      border-radius: 8px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 50px rgba(230, 32, 112, 0.2);
+      transform: scale(0.9);
+      transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .lightbox-overlay.active .lightbox-img {
+      transform: scale(1); /* 丝滑放大打开 */
+    }
+
+    /* 关闭提示小标签 */
+    .lightbox-close-tip {
+      position: absolute;
+      bottom: 30px;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
     footer {
       padding: 40px 0;
       border-top: 1px solid rgba(255,255,255,0.05);
@@ -151,7 +205,7 @@
 
     <div class="drawing-grid">
 
-      <div class="drawing-card">
+      <div class="drawing-card" onclick="openLightbox('assets/cover3.jpg')">
         <div class="image-wrapper">
           <img src="assets/cover3.jpg" alt="Urban Sea Turtle">
         </div>
@@ -161,7 +215,7 @@
         </div>
       </div>
 
-      <div class="drawing-card">
+      <div class="drawing-card" onclick="openLightbox('assets/cover7.jpg')">
         <div class="image-wrapper">
           <img src="assets/cover7.jpg" alt="The Suitcase of Dreams">
         </div>
@@ -171,7 +225,7 @@
         </div>
       </div>
 
-      <div class="drawing-card">
+      <div class="drawing-card" onclick="openLightbox('assets/cover5.jpg')">
         <div class="image-wrapper">
           <img src="assets/cover5.jpg" alt="Ship in a Bottle">
         </div>
@@ -181,7 +235,7 @@
         </div>
       </div>
 
-      <div class="drawing-card">
+      <div class="drawing-card" onclick="openLightbox('assets/cover4.jpg')">
         <div class="image-wrapper">
           <img src="assets/cover4.jpg" alt="Winter Stream">
         </div>
@@ -191,7 +245,7 @@
         </div>
       </div>
 
-      <div class="drawing-card">
+      <div class="drawing-card" onclick="openLightbox('assets/cover1.jpg')">
         <div class="image-wrapper">
           <img src="assets/cover1.jpg" alt="Angels & Demons">
         </div>
@@ -201,7 +255,7 @@
         </div>
       </div>
 
-      <div class="drawing-card">
+      <div class="drawing-card" onclick="openLightbox('assets/cover.jpg')">
         <div class="image-wrapper">
           <img src="assets/cover.jpg" alt="Matcha Cake">
         </div>
@@ -211,7 +265,7 @@
         </div>
       </div>
 
-      <div class="drawing-card">
+      <div class="drawing-card" onclick="openLightbox('assets/cover2.jpg')">
         <div class="image-wrapper">
           <img src="assets/cover2.jpg" alt="Peaches">
         </div>
@@ -221,7 +275,7 @@
         </div>
       </div>
 
-      <div class="drawing-card">
+      <div class="drawing-card" onclick="openLightbox('assets/cover6.jpg')">
         <div class="image-wrapper">
           <img src="assets/cover6.jpg" alt="Street Signs">
         </div>
@@ -234,16 +288,48 @@
     </div>
   </main>
 
+  <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
+    <img id="lightbox-img" class="lightbox-img" src="" alt="Full Scale Drawing">
+    <div class="lightbox-close-tip">Click anywhere to return</div>
+  </div>
+
   <footer style="text-align: center;">
     <p style="color: #555; font-size: 0.8rem; margin: 0;">&copy; 2026 Xiaowen Ma. All rights reserved.</p>
   </footer>
 
   <script>
+    // 鼠标光晕移动追踪
     const glow = document.querySelector('.bg-glow');
     document.addEventListener('mousemove', (e) => {
       const x = (e.clientX / window.innerWidth) * 100;
       const y = (e.clientY / window.innerHeight) * 100;
       glow.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(230, 32, 112, 0.15) 0%, transparent 50%)`;
+    });
+
+    // ==========================================================================
+    // 🆕 新增：大图查看控制脚本
+    // ==========================================================================
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    // 打开全屏大图（全画幅）
+    function openLightbox(imageSrc) {
+      lightboxImg.src = imageSrc;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden'; // 防止全屏状态下背景滚动
+    }
+
+    // 关闭大图，丝滑回到画廊
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = ''; // 恢复滚动
+    }
+
+    // 快捷键支持：按 ESC 键也能关闭返回
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
     });
   </script>
 
