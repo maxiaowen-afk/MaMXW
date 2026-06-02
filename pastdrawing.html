@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Past Drawings | Xiaowen Ma</title>
+  <link rel="stylesheet" href="MaMXW.css">
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background: #0a0a0a;
+      font-family: 'Urbanist', sans-serif;
+      color: white;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    /* 动态光晕背景：保持你原汁原味的霓虹赛博感 */
+    .bg-glow {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(230, 32, 112, 0.15) 0%, transparent 50%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    header { padding: 20px 0; }
+    nav { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .nav-links { display: flex; list-style: none; gap: 30px; margin: 0; padding: 0; }
+    .nav-links a { color: white; text-decoration: none; font-size: 0.9rem; letter-spacing: 1px; transition: 0.3s; }
+    .nav-links a:hover { color: #e62070; }
+
+    /* 让当前页面的导航高亮显示 */
+    .nav-links a.active-page { color: #e62070; font-weight: 700; }
+    .logo { font-weight: 700; text-decoration: none; color: white; letter-spacing: 1px; }
+
+    /* 画廊标题 */
+    .section-title {
+      font-size: 3rem;
+      background: linear-gradient(to right, #fff, #e62070);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 40px;
+      margin-bottom: 50px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    /* 3D 视角卡片网格系统 */
+    .gallery-container {
+      max-width: 1150px;
+      margin: 0 auto 80px auto;
+      padding: 0 20px;
+      perspective: 1000px;
+    }
+
+    .drawing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    /* 毛玻璃画框卡片 */
+    .drawing-card {
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .drawing-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(230, 32, 112, 0.4);
+      box-shadow: 0 20px 40px rgba(230, 32, 112, 0.15);
+    }
+
+    /* 图片容器，确保比例完美不被拉伸 */
+    .image-wrapper {
+      width: 100%;
+      height: 280px;
+      background: #050505;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .drawing-card:hover .image-wrapper img {
+      transform: scale(1.08);
+    }
+
+    /* 格式化画作文字标签（带空格） */
+    .drawing-info {
+      padding: 20px;
+      text-align: left;
+    }
+
+    .drawing-info h3 {
+      font-size: 1.1rem;
+      margin: 0 0 5px 0;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .drawing-info p {
+      font-size: 0.85rem;
+      margin: 0;
+      color: #888;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+
+  <header>
+    <nav>
+      <a href="index.html" class="logo">MA <span style="color: #e62070;">XW</span> ART.</a>
+      <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="pastdrawing.html" class="active-page">Past Drawings</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="gallery-container">
+    <h1 class="section-title" style="text-align: center;">PAST DRAWINGS</h1>
+
+    <div class="drawing-grid">
+
+      <div class="drawing-card">
+        <div class="image-wrapper">
+          <img src="assets/cover3.jpg" alt="Urban Sea Turtle">
+        </div>
+        <div class="drawing-info">
+          <h3>Urban Sea Turtle</h3>
+          <p>Watercolor & Gouache</p>
+        </div>
+      </div>
+
+      <div class="drawing-card">
+        <div class="image-wrapper">
+          <img src="assets/cover7.jpg" alt="The Suitcase of Dreams">
+        </div>
+        <div class="drawing-info">
+          <h3>The Suitcase of Dreams</h3>
+          <p>Watercolor on Paper</p>
+        </div>
+      </div>
+
+      <div class="drawing-card">
+        <div class="image-wrapper">
+          <img src="assets/cover5.jpg" alt="Ship in a Bottle">
+        </div>
+        <div class="drawing-info">
+          <h3>Ship in a Bottle</h3>
+          <p>Watercolor Study</p>
+        </div>
+      </div>
+
+      <div class="drawing-card">
+        <div class="image-wrapper">
+          <img src="assets/cover4.jpg" alt="Winter Stream">
+        </div>
+        <div class="drawing-info">
+          <h3>Winter Stream</h3>
+          <p>Watercolor / Fine Art</p>
+        </div>
+      </div>
+
+      <div class="drawing-card">
+        <div class="image-wrapper">
+          <img src="assets/cover1.jpg" alt="Angels & Demons">
+        </div>
+        <div class="drawing-info">
+          <h3>Angels & Demons</h3>
+          <p>Mixed Media Illustration</p>
+        </div>
+      </div>
+
+      <div class="drawing-card">
+        <div class="image-wrapper">
+          <img src="assets/cover.jpg" alt="Matcha Cake">
+        </div>
+        <div class="drawing-info">
+          <h3>Matcha Cake</h3>
+          <p>Still Life Study</p>
+        </div>
+      </div>
+
+      <div class="drawing-card">
+        <div class="image-wrapper">
+          <img src="assets/cover2.jpg" alt="Peaches">
+        </div>
+        <div class="drawing-info">
+          <h3>Peaches</h3>
+          <p>Still Life Study</p>
+        </div>
+      </div>
+
+      <div class="drawing-card">
+        <div class="image-wrapper">
+          <img src="assets/cover6.jpg" alt="Street Signs">
+        </div>
+        <div class="drawing-info">
+          <h3>Street Signs</h3>
+          <p>Urban Sketching</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer style="text-align: center;">
+    <p style="color: #555; font-size: 0.8rem; margin: 0;">&copy; 2026 Xiaowen Ma. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const glow = document.querySelector('.bg-glow');
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      glow.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(230, 32, 112, 0.15) 0%, transparent 50%)`;
+    });
+  </script>
+
+</body>
+</html>
