@@ -5,62 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Xiaowen Ma | Digital Artist</title>
   <link rel="stylesheet" href="MaMXW.css">
-  <link href="https://fonts.googleapis.com/css2 family=Urbanist:wght@300;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;700&display=swap" rel="stylesheet">
 
   <style>
     body {
       background: #0a0a0a;
       font-family: 'Urbanist', sans-serif;
-      overflow: hidden; /* 防止粒子超出屏幕产生滚动条 */
+      overflow: hidden;
       margin: 0;
     }
 
-    /* 鼠标交互光晕层 - 提高 z-index 确保叠加在粒子之上 */
     .bg-glow {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       background: radial-gradient(circle at 50% 50%, rgba(230, 32, 112, 0.15) 0%, transparent 50%);
-      z-index: 2; /* 放在所有内容的底层，但粒子之上 */
+      z-index: 2;
       pointer-events: none;
     }
 
-    /* 纸片艺术粒子容器 */
     .artwork-particles {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 1; /* 放在光晕和内容的下面 */
+      z-index: 1;
       pointer-events: none;
       overflow: hidden;
     }
 
-    /* 单个“纸片”粒子的样式 */
     .artwork-particle {
       position: absolute;
       width: auto;
       height: auto;
-      object-fit: contain; /* 保证全画幅不裁剪 */
+      object-fit: contain;
       pointer-events: none;
-      opacity: 0; /* 初始隐藏，通过动画淡入 */
-
-      /* 添加纸片般的轻微投影，使其更立体 */
-      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
-
-      /* 基础变换：大小和旋转 */
+      opacity: 0;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6));
       transform-style: preserve-3d;
-
-      /* 淡入淡出和基础变换动画 */
-      transition: opacity 3s ease-in-out, transform 3s ease-in-out;
+      transition: opacity 4s ease-in-out, transform 12s linear;
     }
 
-    /* 当粒子活动时的状态：控制最高透明度 23% */
     .artwork-particle.active {
-      opacity: 0.23; /* 20%-25% 视觉效果最神秘高级 */
+      opacity: 0.23;
     }
 
-    /* 核心内容容器 - 最高 z-index */
     header, main, footer {
       position: relative;
       z-index: 3;
@@ -123,7 +112,6 @@
   </header>
 
   <main style="max-width: 1000px; margin: 15vh auto; text-align: center; padding: 0 20px;">
-
     <div style="margin-bottom: 20px; opacity: 0.6; letter-spacing: 5px; font-size: 0.9rem; color: white;">
         DIGITAL ARCHITECT & MODELER
     </div>
@@ -152,7 +140,6 @@
   </footer>
 
   <script>
-    // 1. 鼠标跟随红光逻辑
     const glow = document.querySelector('.bg-glow');
     document.addEventListener('mousemove', (e) => {
       const x = (e.clientX / window.innerWidth) * 100;
@@ -160,45 +147,61 @@
       glow.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(230, 32, 112, 0.15) 0%, transparent 50%)`;
     });
 
-    // 2. 核心：纸片艺术粒子管理器
     const container = document.getElementById('particle-container');
     const imageSources = [
       'assets/cover.jpg', 'assets/cover1.jpg', 'assets/cover2.jpg', 'assets/cover3.jpg',
       'assets/cover4.jpg', 'assets/cover5.jpg', 'assets/cover6.jpg', 'assets/cover7.jpg'
     ];
     const particles = [];
-    const maxParticles = 18; // 屏幕上同时存在的最大粒子数，根据性能调整
+    const maxParticles = 12;
 
-    // 创建粒子的函数
     function createParticle() {
-      if (particles.length >= maxParticles) return; // 达到最大数量则不创建
+      if (particles.length >= maxParticles) return;
 
       const img = document.createElement('img');
-      // 随机选择一张画作
       img.src = imageSources[Math.floor(Math.random() * imageSources.length)];
       img.className = 'artwork-particle';
       img.alt = 'Artwork Piece';
-
-      // 核心：全画幅不裁剪 (contain)
       img.style.objectFit = 'contain';
 
-      // 1. 随机化基础属性
-      const size = 15 + Math.random() * 10; // 随机大小：15%-25% 屏幕宽度
+      const size = 12 + Math.random() * 8;
       img.style.width = `${size}vw`;
 
-      const startX = Math.random() * 100; // 随机起始位置 (X轴)
+      const startX = Math.random() * 80 + 10;
+      const startY = Math.random() * 80 + 10;
       img.style.left = `${startX}%`;
-      const startY = Math.random() * 100; // 随机起始位置 (Y轴)
       img.style.top = `${startY}%`;
 
-      const rotate = (Math.random() - 0.5) * 60; // 随机旋转角：-30度 到 30度
-      img.style.transform = `rotate(${rotate}deg) scale(0.2)`; // 初始缩小
+      const startRotate = (Math.random() - 0.5) * 40;
+      img.style.transform = `translate(-50%, -50%) rotate(${startRotate}deg) scale(0.8)`;
 
       container.appendChild(img);
       particles.push(img);
 
-      // 2. 动画触发：淡入和漫游起点
-      // 使用 setTimeout 确保 DOM 渲染后再添加类
       setTimeout(() => {
         img.classList.add('active');
-        // 核心：漫游动画路径
+
+        const moveX = (Math.random() - 0.5) * 15;
+        const moveY = (Math.random() - 0.5) * 15;
+        const endRotate = startRotate + (Math.random() - 0.5) * 30;
+
+        img.style.transform = `translate(calc(-50% + ${moveX}vw), calc(-50% + ${moveY}vh)) rotate(${endRotate}deg) scale(1.05)`;
+      }, 50);
+    }
+
+    for(let i = 0; i < 6; i++) {
+      setTimeout(createParticle, i * 600);
+    }
+
+    setInterval(createParticle, 3000);
+
+    setInterval(() => {
+      if (particles.length > 6) {
+        const oldest = particles.shift();
+        oldest.classList.remove('active');
+        setTimeout(() => { oldest.remove(); }, 4000);
+      }
+    }, 3000);
+  </script>
+</body>
+</html>
