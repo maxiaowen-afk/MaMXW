@@ -64,13 +64,13 @@
     <h1 style="font-size: 3rem; margin-bottom: 40px; letter-spacing: 2px;">SELECTED WORKS</h1>
 
     <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; flex-wrap: wrap;">
-        <button onclick="showContent('pdf')" class="project-btn">PROJECT 01: PROPOSAL</button>
-        <button onclick="showContent('gallery')" class="project-btn">PROJECT 02: GALLERY</button>
-        <button onclick="showContent('minions')" class="project-btn">PROJECT 03: MINIONS</button>
+        <button onclick="showContent('2d')" class="project-btn">PROJECT 01: 2D ASSIGNMENT</button>
+        <button onclick="showContent('3d')" class="project-btn">PROJECT 02: 3D ASSIGNMENT</button>
+        <button onclick="showContent('4d')" class="project-btn">PROJECT 03: 4D ASSIGNMENT</button>
     </div>
 
     <div id="display-container">
-        <div id="content-pdf" class="content-box">
+        <div id="content-2d" class="content-box">
             <iframe src="assets/%E4%BD%9C%E5%93%81%E9%9B%86.pdf" width="100%" height="750px" style="border: none; border-radius: 10px;"></iframe>
             <div class="process-section">
                 <div class="process-title">CONCEPTUAL FRAMEWORK</div>
@@ -87,7 +87,7 @@
             <button onclick="hideAll()" class="close-btn">COLLAPSE VIEW</button>
         </div>
 
-        <div id="content-gallery" class="content-box">
+        <div id="content-3d" class="content-box">
             <model-viewer src="assets/gallery.glb" auto-rotate camera-controls style="width: 100%; height: 500px;"></model-viewer>
             <div class="process-section">
                 <div class="process-title">DESIGN EXPLORATION</div>
@@ -100,7 +100,7 @@
             <button onclick="hideAll()" class="close-btn">COLLAPSE VIEW</button>
         </div>
 
-        <div id="content-minions" class="content-box">
+        <div id="content-4d" class="content-box">
             <model-viewer src="assets/bigger%20minion.glb" auto-rotate camera-controls style="width: 100%; height: 500px;"></model-viewer>
             <div class="process-section">
                 <div class="process-title">CONCEPTUAL FRAMEWORK</div>
@@ -123,6 +123,8 @@
     document.addEventListener('mousemove', (e) => {
       glow.style.background = `radial-gradient(circle at ${(e.clientX / window.innerWidth) * 100}% ${(e.clientY / window.innerHeight) * 100}%, rgba(230, 32, 112, 0.15) 0%, transparent 50%)`;
     });
+
+    // 优化的显示控制逻辑
     function showContent(id) {
         hideAll();
         const target = document.getElementById('content-' + id);
