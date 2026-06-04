@@ -110,9 +110,7 @@
 
           <model-viewer id="screen-3d" class="display-screen" src="assets/bigger%20minion.glb" auto-rotate camera-controls style="background: #111;"></model-viewer>
 
-          <video id="screen-4d" class="display-screen" controls poster="assets/cover.jpg">
-            <source src="assets/your-video.mp4" type="video/mp4">
-          </video>
+          <iframe id="screen-4d" class="display-screen" src="https://www.youtube.com/embed/qi4xw-SO-dU?enablejsapi=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
 
         <div class="process-section">
@@ -146,7 +144,13 @@
           <div id="text-4d" class="display-screen">
             <div class="process-title">CONCEPTUAL FRAMEWORK</div>
             <div class="process-item">
-              <p>This section is reserved for the 4D Assignment video presentation. It will explore the element of time, motion, and continuity within digital art space.</p>
+              <p>The core concept of this project is to document a transitional journey, tracking a geographical, visual, and psychological shift from Southern California to Northern California. Moving from the bustling urban sun of Los Angeles, through the serene coastal refuge of Morro Bay, and concluding at the academic community of UC Davis, the project functions as both a travel vlog and a personal visual essay on growth and change.
+
+              Rather than a standard, loosely organized vlog, this video treats the physical road trip as a narrative spine. Each of the three distinct locations serves a specific thematic purpose, translated through unique sound design, color grading, and pace:
+
+              • Los Angeles (The Origin): Represents dynamic energy, high-paced movement, and urban architecture.
+              • Morro Bay (The Transition): Functions as a natural interlude. The massive presence of Morro Rock and the surrounding ocean fog introduce a slower, contemplative tone.
+              • UC Davis (The Destination): Represents a fresh start, intellectual growth, and a connection with nature, heavily emphasizing the campus’s iconic greenery and bicycle culture.</p>
             </div>
           </div>
         </div>
@@ -162,8 +166,11 @@
     });
 
     function updateGallery(type) {
-        const video = document.getElementById('screen-4d');
-        if(video) video.pause();
+        // 如果切离 Project 03，利用 postMessage 让 YouTube 视频自动暂停
+        const youtubeFrame = document.getElementById('screen-4d');
+        if(youtubeFrame) {
+            youtubeFrame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        }
 
         const screens = document.querySelectorAll('.display-screen');
         screens.forEach(s => s.style.display = 'none');
